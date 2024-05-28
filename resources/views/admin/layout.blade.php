@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>M/s New Nabaratna Hospitality Pvt. Ltd.</title>
+    <title>Mater Railway</title>
 
     <link rel="stylesheet" type="text/css" href="{{url('bootstrap3/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('assets/font-awesome/css/font-awesome.min.css')}}">
@@ -18,8 +18,9 @@
             <div id="content" style="display: flex;">
                 <div class="ul" style="width:250px;background-color: #ececec59;position: fixed;top: 0;left: 0;height: 100vh;overflow-y: scroll;padding:0;">
                     <div style="padding:16px;">
-                        <span style="font-size: 18px;font-weight: bold">M/s New Nabaratna Hospitality Pvt. Ltd.</span> 
-                        <div style="font-size: 12px; padding-top: 5px;">Cloakroom, KyqInd Guwahati Railway Station, PF No. 1, GSTIN: 18AAICN4763E1ZA</div>
+                        <span style="font-size: 18px;font-weight: bold">
+                            {{Session::get('client_name')}}
+                        </span>
                     </div>
                     <ul class="nav nav-pills nav-stacked">
                         

@@ -7,4 +7,7 @@ ALTER TABLE `users` CHANGE `session_id` `client_id` INT(11) NULL DEFAULT '0';
 ALTER TABLE `cloakroom_entries` ADD `client_id` INT NOT NULL DEFAULT '0' AFTER `id`;
 ALTER TABLE `cloakroom_penalities` ADD `client_id` INT NOT NULL DEFAULT '0' AFTER `id`;
 
+CREATE TABLE `cloakroom_rate_list` ( `id` INT NOT NULL AUTO_INCREMENT , `client_id` INT NULL DEFAULT NULL , `first_rate` INT NULL DEFAULT NULL , `second_rate` INT NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+ALTER TABLE `cloakroom_entries` ADD `total_day` INT NOT NULL DEFAULT '0' AFTER `no_of_day`;
+
 ?>

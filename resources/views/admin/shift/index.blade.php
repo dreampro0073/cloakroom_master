@@ -85,33 +85,7 @@
 
                         </td>
                     </tr>
-                    <tr>
-                       <td>
-                           Locker
-                       </td> 
-                        <td>
-                            @{{locker_data.last_hour_upi_total}}
-                        </td>
-                        <td>
-                            @{{locker_data.last_hour_cash_total}}
-
-                        </td>
-                        <td>
-                            @{{locker_data.last_hour_total}}
-                        </td>
-
-                        <td>
-                            @{{locker_data.total_shift_upi}}
-                        </td>
-                        <td>
-                            @{{locker_data.total_shift_cash}}
-
-                        </td>
-                        <td>
-                            @{{locker_data.total_collection}}
-
-                        </td>
-                    </tr>
+                    
                     <tr>
                        <td>
                            <b>Grand Total</b>

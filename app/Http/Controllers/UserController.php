@@ -55,6 +55,11 @@ class UserController extends Controller {
         
         if($validator->passes()){
             if(Auth::attempt($cre)){   
+                $client = DB::table("clients")->where("id", Auth::user()->client_id)->first();
+                if($client){
+                    Session::put('client_name',$client->name);
+
+                }
                 return Redirect::to('/admin/cloak-rooms');
 
             } else {
@@ -97,7 +102,7 @@ class UserController extends Controller {
 
 
     public function initUsers(Request $request){
-        $users = DB::table('users')->select('id','name','email','mobile');
+        $users = DB::table('users')->select('id','name','email','mobile')->where("client_id", Auth::user()->client_id);
 
         if($request->name){
             $users = $users->where('name','LIKE','%'.$request->name.'%');
@@ -117,7 +122,7 @@ class UserController extends Controller {
     }
 
     public function editUser(Request $request){
-        $user = User::find($request->user_id);
+        $user = User::where('id', $request->user_id)->where("client_id", Auth::user()->client_id)->first();
         if($user){
             $user->mobile = $user->mobile*1;
         }
@@ -178,6 +183,7 @@ class UserController extends Controller {
             $user->name = $request->name;
             $user->email = $request->email;
             $user->mobile = $request->mobile;    
+            $user->client_id = Auth::user()->client_id;    
                
             $user->save();
             $data['success'] = true;

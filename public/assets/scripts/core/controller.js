@@ -17,13 +17,18 @@ app.controller('cloackCtrl', function($scope , $http, $timeout , DBService) {
     $scope.check_shift = "";
     $scope.pay_types = [];
     $scope.days = [];
+    $scope.cloak_first_rate = 0;
+    $scope.cloak_second_rate = 0;
     $scope.init = function () {
-        
+
         DBService.postCall($scope.filter, '/api/cloak-rooms/init/'+$scope.type).then((data) => {
             if (data.success) {
+                console.log(data.rate_list);
                 $scope.pay_types = data.pay_types;
                 $scope.l_entries = data.l_entries;
                 $scope.days = data.days;
+                $scope.cloak_first_rate = data.rate_list.first_rate;
+                $scope.cloak_second_rate = data.rate_list.second_rate;
             }
         });
     }
@@ -142,9 +147,9 @@ app.controller('cloackCtrl', function($scope , $http, $timeout , DBService) {
     $scope.changeAmount = function(){
         // $scope.formData.paid_amount = 0;
        
-        var amount = 50;
+        var amount = $scope.cloak_first_rate;
         if($scope.formData.no_of_day > 1){
-            amount  = (amount + (($scope.formData.no_of_day-1)*75));
+            amount  = (amount + (($scope.formData.no_of_day-1)*$scope.cloak_second_rate));
         }
 
         amount = amount*$scope.formData.no_of_bag;
@@ -366,7 +371,6 @@ app.controller('shiftCtrl', function($scope , $http, $timeout , DBService) {
                 $scope.users = data.users;                 
                 
                 $scope.cloak_data = data.cloak_data; 
-                $scope.locker_data = data.locker_data; 
                
                 $scope.total_shift_upi = data.total_shift_upi ; 
                 $scope.total_shift_cash = data.total_shift_cash ; 
@@ -374,7 +378,7 @@ app.controller('shiftCtrl', function($scope , $http, $timeout , DBService) {
 
                 $scope.last_hour_upi_total = data.last_hour_upi_total ; 
                 $scope.last_hour_cash_total = data.last_hour_cash_total ; 
-                 $scope.last_hour_total = data.last_hour_total ;
+                $scope.last_hour_total = data.last_hour_total ;
 
                 $scope.check_shift = data.check_shift ; 
                 $scope.shift_date = data.shift_date ; 

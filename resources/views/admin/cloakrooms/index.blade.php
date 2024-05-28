@@ -80,7 +80,7 @@
                             <td>
                                 @if($type == 0)
                                     <a href="javascript:;" ng-click="checkoutCloak(item.id)" class="btn btn-danger btn-sm">Checkout</a>
-                                    <a href="javascript:;" ng-click="edit(item.id)" class="btn btn-warning btn-sm">Edit</a>
+                                    <!-- <a href="javascript:;" ng-click="edit(item.id)" class="btn btn-warning btn-sm">Edit</a> -->
                                    
                                    
                                 @endif

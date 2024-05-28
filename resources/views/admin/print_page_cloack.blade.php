@@ -50,14 +50,8 @@
 <body>
 	<div class="main" id="printableArea">
 		<h4>
-			M/s New Nabaratna Hospitality Pvt. Ltd.
+			{{Session::get('client_name')}}
 		</h4>
-		<p class="m-space">
-			Cloakroom, KyqInd Guwahati Railway Station, PF No. 1
-		</p>
-		<h5>
-			GSTIN: 18AAICN4763E1ZA
-		</h5>
 		<h5>
 			Cloakroom - {{$print_data->id}}
 		</h5>
@@ -114,13 +108,13 @@
 				</tr>
 				<tr>
 					<td class="w-46">For first 24 hours or part there of</td>
-					<td class="w-20">50/- Per Package</td>
+					<td class="w-20">{{$rate_list->first_rate}}/- Per Package</td>
 					<td class="w-16" rowspan="2">{{$print_data->no_of_bag}}</td>
 					<td class="w-16">{{$print_data->for_first_day}}</td>
 				</tr>
 				<tr>
 					<td class="w-46">For each subsequent 24 hours or part thee of</td>
-					<td class="w-20">75/- Per Package</td>
+					<td class="w-20">{{$rate_list->second_rate}}/- Per Package</td>
 					<td class="w-16">{{$print_data->for_other_day}}</td>
 				</tr>
 				
@@ -142,6 +136,35 @@
 				<strong>Thanks Visit Again</strong>
 			</p>
 		</div>
+		
+		@for($i = 1; $i <= $print_data->no_of_bag; $i++)
+		<div>
+			<h4>
+				<span class="text">Name: <b>{{ $print_data->name }}</b></span>
+			</h4>
+			<div class="table-div">
+				
+				<div class="w-50">
+					<span class="text">Luggage No: <b>{{ $i }}</b></span>
+				</div>			
+				<div class="w-50">
+					<span class="text">Bill No: <b>{{ $print_data->unique_id }}</b></span>
+				</div>
+			</div>
+			<div style="margin-bottom:10px;">
+				<div>
+					<span class="text">In Time: <b>{{date("h:i a, d M y",strtotime($print_data->checkin_date))}}</b></span>
+				</div>
+				<div>
+					@if($print_data->is_late == 0) 
+						<span class="text">Out Time: <b>{{date("h:i a, d M y",strtotime($print_data->checkout_date))}}</b></span>
+					@else
+						<span class="text">Out Time: <b>{{date("h:i a, d M y",strtotime($print_data->checkout_time))}}</b></span>
+					@endif
+				</div>
+			</div>
+		</div>
+		@endfor
 		
 	</div>
 	<script type="text/javascript">
