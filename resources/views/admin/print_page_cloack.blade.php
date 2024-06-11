@@ -37,7 +37,8 @@
 			width: 16.66%;
 		}
 		td,span,p{
-			font-size: 12px;
+			font-size: 13px;
+			font-weight: bold;
 		}
 		.text-right{
 			text-align: right;
@@ -51,20 +52,18 @@
 	<div class="main" id="printableArea">
 		<h4>
 			{{Session::get('client_name')}}
+			<span style="display: block;text-align: center;font-size: 14px;">
+				GST No. 10AABAK5354K1ZU
+			</span>
 		</h4>
 		<h5>
-			Cloakroom - {{$print_data->id}}
+			<span class="text">Sl. No: <b style="font-size:18px;">{{ $print_data->id }}</b></span>
 		</h5>
-		<div class="table-div">
-			<div class="w-50">
-				<span class="text">Sl. No: <b>{{ $print_data->id }}</b></span>
-			</div>
-			<div class="w-50">
-				<span class="text">Bill No: <b>{{ $print_data->unique_id }}</b></span>
-			</div>
-			
-			
-		</div>
+		<h5>
+			<span class="text"><span class="text">Bill No: <b style="font-size:18px;">{{ $print_data->unique_id }}</b></span></b></span>
+		</h5>
+
+		
 	
 		<div class="table-div">
 			<div class="w-50">
@@ -88,13 +87,13 @@
 		</div>
 		<div style="margin-bottom:10px;">
 			<div>
-				<span class="text">In Time: <b>{{date("h:i a, d M y",strtotime($print_data->checkin_date))}}</b></span>
+				<span class="text">In Time: <b style="font-size: 18px;">{{date("h:i a, d M y",strtotime($print_data->checkin_date))}}</b></span>
 			</div>
 			<div>
 				@if($print_data->is_late == 0) 
-					<span class="text">Out Time: <b>{{date("h:i a, d M y",strtotime($print_data->checkout_date))}}</b></span>
+					<span class="text">Valid Upto: <b style="font-size: 18px;">{{date("h:i a, d M y",strtotime($print_data->checkout_date))}}</b></span>
 				@else
-					<span class="text">Out Time: <b>{{date("h:i a, d M y",strtotime($print_data->checkout_time))}}</b></span>
+					<span class="text">Valid Upto: <b style="font-size: 18px;">{{date("h:i a, d M y",strtotime($print_data->checkout_time))}}</b></span>
 				@endif
 			</div>
 		</div>
@@ -113,7 +112,7 @@
 					<td class="w-16">{{$print_data->for_first_day}}</td>
 				</tr>
 				<tr>
-					<td class="w-46">For each subsequent 24 hours or part thee of</td>
+					<td class="w-46">For each subsequent 24 hours or part thereof</td>
 					<td class="w-20">{{$rate_list->second_rate}}/- Per Package</td>
 					<td class="w-16">{{$print_data->for_other_day}}</td>
 				</tr>
@@ -131,40 +130,15 @@
 		<div style="margin-top:10px;text-align: right;">
 			<span style="text-align:right;font-weight: bold;">Note: We are not responsible for keeping eatable items inside your bag. Rats can be destroy your food and bags</span>
 		</div>
+		<div style="margin-top:10px;text-align: right;">
+			Authorised Signatory : {{Auth::user()->name}}
+		</div>
+
 		<div style="margin-top:10px;text-align:center;">
 			<p style="margin-top:10px;font-size: 16px;">
 				<strong>Thanks Visit Again</strong>
 			</p>
 		</div>
-		
-		@for($i = 1; $i <= $print_data->no_of_bag; $i++)
-		<div>
-			<h4>
-				<span class="text">Name: <b>{{ $print_data->name }}</b></span>
-			</h4>
-			<div class="table-div">
-				
-				<div class="w-50">
-					<span class="text">Luggage No: <b>{{ $i }}</b></span>
-				</div>			
-				<div class="w-50">
-					<span class="text">Bill No: <b>{{ $print_data->unique_id }}</b></span>
-				</div>
-			</div>
-			<div style="margin-bottom:10px;">
-				<div>
-					<span class="text">In Time: <b>{{date("h:i a, d M y",strtotime($print_data->checkin_date))}}</b></span>
-				</div>
-				<div>
-					@if($print_data->is_late == 0) 
-						<span class="text">Out Time: <b>{{date("h:i a, d M y",strtotime($print_data->checkout_date))}}</b></span>
-					@else
-						<span class="text">Out Time: <b>{{date("h:i a, d M y",strtotime($print_data->checkout_time))}}</b></span>
-					@endif
-				</div>
-			</div>
-		</div>
-		@endfor
 		
 	</div>
 	<script type="text/javascript">

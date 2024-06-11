@@ -23,6 +23,10 @@
                         </span>
                     </div>
                     <ul class="nav nav-pills nav-stacked">
+
+                        <li class="@if(isset($sidebar)) @if($sidebar == 'sitting') active @endif @endif">
+                            <a href="{{url('/admin/sitting')}}"><i class="fa fa-sitemap"></i>Sitting</a>
+                        </li>
                         
                         <li class="@if(isset($sidebar)) @if($sidebar == 'cloakrooms') active @endif @endif">
                             <a href="{{url('/admin/cloak-rooms')}}"><i class="fa fa-medkit" aria-hidden="true"></i>Cloakrooms</a>
@@ -37,7 +41,7 @@
                         <li class="@if(isset($sidebar)) @if($sidebar == 'shift') active @endif @endif">
                             <a href="{{url('/admin/shift/current')}}"><i class="fa fa-industry" aria-hidden="true"></i>Shift Status</a>
                         </li>
-                        @if(Auth::user()->priv == 1 || Auth::user()->priv == 2)
+                        @if(Auth::user()->priv == 2)
                             <li class="@if(isset($sidebar)) @if($sidebar == 'users') active @endif @endif">
                                 <a href="{{url('/admin/users')}}"><i class="fa fa-users" aria-hidden="true"></i>Users</a>
                             </li>

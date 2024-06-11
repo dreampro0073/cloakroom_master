@@ -117,7 +117,7 @@
 					<td class="w-16">{{$print_data->for_first_day}}</td>
 				</tr>
 				<tr>
-					<td class="w-46">For each subsequent 24 hours or part thee of</td>
+					<td class="w-46">For each subsequent 24 hours or part thereof</td>
 					<td class="w-20">105/- Per Package</td>
 					<td class="w-16">{{$print_data->for_other_day}}</td>
 				</tr>

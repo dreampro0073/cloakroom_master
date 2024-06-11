@@ -31,6 +31,10 @@ class CloakRoomController extends Controller {
 	public function initRoom(Request $request,$type =0){
 
 		$l_entries = DB::table('cloakroom_entries')->select('cloakroom_entries.*','users.name as username')->leftJoin('users','users.id','=','cloakroom_entries.delete_by')->where("cloakroom_entries.client_id", Auth::user()->client_id);
+		if($request->id){
+			$l_entries = $l_entries->where('cloakroom_entries.id', $request->id);
+		}
+
 		if($request->unique_id){
 			$l_entries = $l_entries->where('cloakroom_entries.unique_id', 'LIKE', '%'.$request->unique_id.'%');
 		}		
@@ -46,8 +50,9 @@ class CloakRoomController extends Controller {
 		}		
 		
 		if($type == 0){
-			$l_entries = $l_entries->where('checkout_status', 0);
+			$l_entries = $l_entries->where('checkout_status', 0)->take(20);
 		}
+		
 		$l_entries = $l_entries->orderBy('id', "DESC")->get();
 
 		foreach ($l_entries as $key => $item) {
@@ -192,7 +197,6 @@ class CloakRoomController extends Controller {
         $print_data->for_other_day = 0;        
         $total_day = $print_data->total_day - 1;
         
-
         if($print_data->total_day > 0) {
             $print_data->for_first_day = $print_data->no_of_bag * $rate_list->first_rate;
             
@@ -204,6 +208,15 @@ class CloakRoomController extends Controller {
         $rate_list = DB::table("cloakroom_rate_list")->where("client_id", Auth::user()->client_id)->first();
               
 		return view('admin.print_page_cloack',compact('print_data','total_amount','rate_list'));
+	}
+	public function printLuggage($id = 0){
+
+        $print_data = DB::table('cloakroom_entries')->where('id', $id)->first();
+
+
+    
+              
+		return view('admin.print_bag_no',compact('print_data'));
 	}
 
     public function checkoutInit(Request $request){

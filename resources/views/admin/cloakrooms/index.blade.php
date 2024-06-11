@@ -11,6 +11,10 @@
                         <div class="col-md-9">
                             <div class="row">
                                 <div class="col-md-2 form-group">
+                                    <label class="label-control">Slip ID</label>
+                                    <input type="text" class="form-control" ng-model="filter.id" />
+                                </div>                    
+                                <div class="col-md-2 form-group">
                                     <label class="label-control">Bill Number</label>
                                     <input type="text" class="form-control" ng-model="filter.unique_id" />
                                 </div>                    
@@ -48,18 +52,23 @@
                             <th>Bill no</th>
                             <th>Name</th>
                             <th>Mobile No</th>
-                            <th>Check In/Check Out</th>
+                            <th>Check In/Valid Upto</th>
                             <th>No Of Bag</th>
                             <th>PNR</th>
                             <th>Pay Type</th>
                             <th>Total Amount</th>
+                            @if(Auth::user()->priv == 1 || Auth::user()->priv == 2)
+                            <th>
+                                Checkout Status
+                            </th>
+                            @endif
                             
                             <th>#</th>
                         </tr>
                     </thead>
                     <tbody ng-if="l_entries.length > 0" >
                         <tr ng-repeat="item in l_entries " ng-class="{'my_class': item.deleted == 1}">
-                            <td>@{{ $index+1 }}</td>
+                            <td>@{{ item.id }}</td>
                             <td>@{{ item.unique_id }}</td>
                             <td>@{{ item.name }}</td>
                             <td>@{{ item.mobile_no }}</td>
@@ -76,15 +85,20 @@
                             </td>  
                             
                             <td>@{{ item.sh_paid_amount }}</td>
+                            @if(Auth::user()->priv == 1 || Auth::user()->priv == 2)
+                            <td>
+                                <span ng-if="item.checkout_status == 0">No</span>
+                                <span ng-if="item.checkout_status == 1">Yes</span>
+                            </td>
+                            @endif
                             
                             <td>
                                 @if($type == 0)
                                     <a href="javascript:;" ng-click="checkoutCloak(item.id)" class="btn btn-danger btn-sm">Checkout</a>
-                                    <!-- <a href="javascript:;" ng-click="edit(item.id)" class="btn btn-warning btn-sm">Edit</a> -->
-                                   
                                    
                                 @endif
                                 <a href="{{url('/admin/cloak-rooms/print')}}/@{{item.id}}" class="btn btn-success btn-sm" target="_blank">Print</a>
+                                <!-- <a href="{{url('/admin/cloak-rooms/print-luggage')}}/@{{item.id}}" class="btn btn-success btn-sm" target="_blank">Print Luggage</a> -->
                             </td>
                         </tr>
                     </tbody>

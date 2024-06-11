@@ -49,14 +49,9 @@
 <body>
 	<div id="printableArea" class="main">
 		<h4>
-			M/s New Nabaratna Hospitality Pvt. Ltd.
+			{{Session::get('client_name')}}
 		</h4>
-		<p class="m-space">
-			Cloakroom, KyqInd Guwahati Railway Station, PF No. 1
-		</p>
-		<h5 style="margin-bottom:8px;">
-			GSTIN: 18AAICN4763E1ZA
-		</h5>
+		
 		<table style="width:100%;margin: -1;" border="1" cellpadding="4" cellspacing="0" >
             <thead>
                
@@ -89,23 +84,7 @@
                     </td>
                    
                 </tr>
-                <tr>
-                   	<td>
-                       <b>Lockers</b>
-                   	</td> 
-                   
-                    <td>
-                        {{$locker_data['total_shift_upi']}}
-                    </td>
-                    <td>
-                        {{$locker_data['total_shift_cash']}}
-                    </td>
-                    <td>
-                        {{$locker_data['total_collection']}}
-                    </td>
-                   
-                </tr>
-
+               
                 <tr>
                    	<td>
                        <b>Grand Total</b>

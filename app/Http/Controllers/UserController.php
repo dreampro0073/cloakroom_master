@@ -175,7 +175,8 @@ class UserController extends Controller {
                 $user = new User;
                 $user->password_check = $request->password;
                 $user->password = Hash::make($request->password);
-                $user->priv = 2;
+                $user->priv = 3;
+                $user->client_id = Auth::user()->client_id;
                 
                 $data['message'] = 'successfully Added';   
             }

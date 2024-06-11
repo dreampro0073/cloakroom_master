@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Cloackroom</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Cloakroom</h5>
                     </div>
                     <div class="col-md-6" style="text-align:right;">
                         <button type="button" class="close" ng-click="hideModal();" aria-label="Close">
@@ -28,7 +28,7 @@
                         </div>
                         <div class="col-md-4 form-group">
                             <label>No Of Bag</label>
-                            <input type="number" ng-model="formData.no_of_bag" class="form-control" ng-keyup="changeAmount()" />
+                            <input type="number" min="1" ng-model="formData.no_of_bag" class="form-control" required ng-keyup="changeAmount()" />
                         </div>    
 
                     </div>
@@ -133,7 +133,7 @@
                             <input type="text" class="form-control" ng-model="formData.checkin_date" readonly />
                         </div>
                          <div class="col-md-3 form-group">
-                            <label>Check Out Date</label>
+                            <label>Valid Upto</label>
                            
                             <input type="text" class="form-control" ng-model="formData.checkout_date" readonly />
                         </div>
@@ -177,9 +177,9 @@
                             <label>Paid Amount</label>
                             <input type="number" ng-model="formData.paid_amount" class="form-control" readonly />
                         </div> 
-                        <div class="col-md-3 form-group">
+                        <div class="col-md-3 form-group" style="color:red;">
                             <label>Balance Amount</label>
-                            <input type="number" ng-model="formData.balance" class="form-control" readonly />
+                            <input type="number" ng-model="formData.balance" style="color:red;" class="form-control" readonly />
                         </div>                        
                         
                         

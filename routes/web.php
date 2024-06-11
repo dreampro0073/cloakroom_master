@@ -5,7 +5,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CloakRoomController;
 use App\Http\Controllers\ShiftController;
-use App\Http\Controllers\LockerController;
+use App\Http\Controllers\SittingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,12 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::get('/reset-password',[UserController::class,'resetPassword']);
 		Route::post('/reset-password',[UserController::class,'updatePassword']);
 
+		Route::group(['prefix'=>"sitting"], function(){
+			Route::get('/',[SittingController::class,'sitting']);
+			Route::get('/print/{id?}', [SittingController::class,'printPost']);
+			Route::get('/print-report', [SittingController::class,'printReports']);
+
+		});
 		
 
 		Route::group(['prefix'=>"shift"], function(){
@@ -44,15 +51,10 @@ Route::group(['middleware'=>'auth'],function(){
 			Route::get('/',[CloakRoomController::class,'index']);
 			Route::get('/all',[CloakRoomController::class,'allRooms']);
 			Route::get('/print/{id?}', [CloakRoomController::class,'printPost']);
+			Route::get('/print-luggage/{id?}', [CloakRoomController::class,'printLuggage']);
 			
 		});	
-		Route::group(['prefix'=>"locker"], function(){
-			Route::get('/',[LockerController::class,'index']);
-			Route::get('/all',[LockerController::class,'allLockers']);
-			Route::get('/print/{id?}', [LockerController::class,'printPost']);
-			
-		});
-
+	
 		Route::group(['prefix'=>"users"], function(){
 			Route::get('/',[UserController::class,'users']);
 		});
@@ -67,6 +69,15 @@ Route::group(['prefix'=>"api"], function(){
 
 	});
 
+	Route::group(['prefix'=>"sitting"], function(){
+		Route::post('/init',[SittingController::class,'initEntries']);
+		Route::post('/edit-init',[SittingController::class,'editEntry']);
+		Route::post('/store',[SittingController::class,'store']);
+		Route::post('/cal-check',[SittingController::class,'calCheck']);
+		Route::get('/delete/{id}',[SittingController::class,'delete']);
+		
+	});
+
 
 	Route::group(['prefix'=>"cloak-rooms"], function(){
 		Route::post('/init/{type}',[CloakRoomController::class,'initRoom']);
@@ -76,16 +87,6 @@ Route::group(['prefix'=>"api"], function(){
 		Route::post('/checkout-init',[CloakRoomController::class,'checkoutInit']);
 		Route::post('/checkout-store',[CloakRoomController::class,'checkoutStore']);
 		Route::get('/delete/{id}',[CloakRoomController::class,'delete']);
-
-	});
-	Route::group(['prefix'=>"locker"], function(){
-		Route::post('/init/{type}',[LockerController::class,'initLocker']);
-		Route::post('/edit-init',[LockerController::class,'editLocker']);
-		Route::post('/store',[LockerController::class,'store']);
-		Route::post('/cal-check',[LockerController::class,'calCheck']);
-		Route::post('/checkout-init',[LockerController::class,'checkoutInit']);
-		Route::post('/checkout-store',[LockerController::class,'checkoutStore']);
-		Route::get('/delete/{id}',[LockerController::class,'delete']);
 
 	});
 	Route::group(['prefix'=>"users"], function(){

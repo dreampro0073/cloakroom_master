@@ -72,7 +72,7 @@ class Entry extends Model
         }
 
     }
-    public static function  getPDate(){
+    public static function getPDate(){
         $p_date = date("Y-m-d");
         return $p_date;
     }

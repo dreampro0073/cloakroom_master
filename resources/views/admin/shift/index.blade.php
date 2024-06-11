@@ -7,7 +7,7 @@
                 <div class="col-md-6">
                     <h2 class="">Total Shift Collection (<?php echo date("d-m-Y"); ?>)</h2>
                 </div>
-                @if(Auth::user()->priv != 1)
+                @if(Auth::user()->priv != 2)
 
                     <div class="col-md-6 text-right" style="padding-top: 25px;">
                         <a href="{{url('/admin/shift/print/1')}}" class="btn btn-sm btn-warning"  target="_blank">
@@ -17,7 +17,7 @@
                 @endif
             </div>
             <hr>
-            @if(Auth::user()->priv ==1)
+            @if(Auth::user()->priv == 2)
             <div class="row">
                 <div class="col-md-3 form-group">
                     <input type="text" class="datepicker form-control" ng-model="filter.input_date">
@@ -45,13 +45,13 @@
                 <thead>
                     <tr>
                         <th rowspan="2"></th>
-                        <th colspan="3">Last Hour</th>
+                        <!-- <th colspan="3">Last Hour</th> -->
                         <th colspan="3">Shift Collection</th>
                     </tr>
                     <tr>
-                        <th>UPI</th>
+                        <!-- <th>UPI</th>
                         <th>Cash</th>
-                        <th>Total</th>
+                        <th>Total</th> -->
                         <th>UPI</th>
                         <th>Cash</th>
                         <th>Total</th>
@@ -62,7 +62,7 @@
                        <td>
                            Cloackroom
                        </td> 
-                        <td>
+                        <!-- <td>
                             @{{cloak_data.last_hour_upi_total}}
                         </td>
                         <td>
@@ -71,7 +71,7 @@
                         </td>
                         <td>
                             @{{cloak_data.last_hour_total}}
-                        </td>
+                        </td> -->
 
                         <td>
                             @{{cloak_data.total_shift_upi}}
@@ -90,7 +90,7 @@
                        <td>
                            <b>Grand Total</b>
                        </td> 
-                        <td>
+                        <!-- <td>
                             <b>@{{last_hour_upi_total}}</b>
                         </td>
                         <td>
@@ -99,7 +99,7 @@
                         </td>
                         <td>
                             <b>@{{last_hour_total}}</b>
-                        </td>
+                        </td> -->
                         <td>
                             <b>@{{total_shift_upi}}</b>
                         </td>
